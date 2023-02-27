@@ -17,3 +17,12 @@ def productor():
         mutex.release()
         sem.release()
 
+def consumidor():
+    global buffer
+    while True:
+        sem.acquire()
+        mutex.acquire()
+        dato = buffer.pop()
+        print ("consumidor:", dato)
+        mutex.release()
+
