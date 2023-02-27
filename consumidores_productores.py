@@ -26,3 +26,9 @@ def consumidor():
         print ("consumidor:", dato)
         mutex.release()
 
+def main():
+    threading.Thread(target=productor).start()
+    threading.Thread(target=consumidor).start()
+
+if __name__ == "__main__":
+    main()
