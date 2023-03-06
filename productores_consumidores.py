@@ -22,3 +22,8 @@ def cliente(nombre): # Definimos la función cliente
         time.sleep(1) # Esperamos un segundo
 
 
+if __name__ == '__main__':
+    t1 = Thread(target=productor, args=("Productor",)) # Creamos un hilo para el productor
+    t2 = Thread(target=cliente, args=("Consumidor",)) # Creamos un hilo para el consumidor
+    t1.start() # Iniciamos el hilo del productor
+    t2.start() # Iniciamos el hilo del consumidor
