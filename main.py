@@ -42,3 +42,32 @@ def consumidor(id):
     print("Milisegundos: ", milisegs)
     print("-"*50)
     return
+
+
+def main():
+    total_productores = 4
+    total_consumidores = 3
+    productores = []
+    consumidores = []
+    start_time = time.time()
+    for i in range(total_productores):
+        productores.append(Thread(target=productor, args=(i,)))
+        productores[i].start()
+    for i in range(total_consumidores):
+        consumidores.append(Thread(target=consumidor, args=(i,)))
+        consumidores[i].start()
+    for i in range(total_productores):
+        productores[i].join()
+    for i in range(total_consumidores):
+        consumidores[i].join()
+    print("Buffer: ", buffer.qsize())
+    print("Total de productores: ", total_productores)
+    print("Total de consumidores: ", total_consumidores)
+    print("La ocupación del Buffer: ")
+    for i in range(tam_buff + 1):
+        print('Celda [', i, ']:', buff[i])
+    print("Tiempo transcurrido: " + str(time.time() - start_time) + " segundos")
+    return
+
+if __name__ == '__main__':
+    main()
